@@ -7,7 +7,8 @@ namespace BeatThat.App
 	/// Base class for a command that lives in the scene (presumably so it can use editor references to other scene objects)
 	/// and binds itself to the controller, executing without creating a new instance.
 	/// </summary>
-	public abstract class MonoCommand : MonoBehaviour, SingleTypeCommand
+	[System.Obsolete("use NotificationCommand")]
+	public abstract class MonoCommand : MonoBehaviour, Command<Notification>, RegistersCommand
 	{
 		public bool m_destoryOnUnbind = false;
 
@@ -54,11 +55,11 @@ namespace BeatThat.App
 			return cache;
 		}
 
-		public Binding RegisterTo(Commands c)
+		public Binding RegisterTo(CommandRegistry c)
 		{
-			this.controller = c;
+			this.registry = c;
 
-			var cRef = new SafeRef<Command>(this);
+			var cRef = new SafeRef<MonoCommand>(this);
 
 			var r = c.Add(this.type, cRef.GetValue);
 			return new MonoCommandBinding(r, this);
@@ -71,13 +72,13 @@ namespace BeatThat.App
 			}
 		}
 
-		protected Commands controller
+		protected CommandRegistry registry
 		{
 			get {
-				return m_controller.value;
+				return m_registry.value;
 			}
 			set {
-				m_controller = new SafeRef<Commands>(value);
+				m_registry = new SafeRef<CommandRegistry>(value);
 			}
 		}
 
@@ -134,6 +135,6 @@ namespace BeatThat.App
 		}
 
 		private SafeRef<MonoCommand> m_bindingRef;
-		private SafeRef<Commands> m_controller;
+		private SafeRef<CommandRegistry> m_registry;
 	}
 }
