@@ -3,6 +3,11 @@ using BeatThat.Service;
 
 namespace BeatThat.App
 {
+	/// <summary>
+	/// Command that registers itself to execute 
+	/// when a specific notification type is dispatched by the NotificationBus,
+	/// with that notification type left as a public property so that it can be set via the unity editor.
+	/// </summary>
 	abstract public class NotificationCommand<ArgType> : NotificationCommandBase<ArgType>
 	{
 		public NotificationType m_notificationType;
@@ -12,6 +17,12 @@ namespace BeatThat.App
 		
 	abstract public class NotificationCommand : NotificationCommand<Notification> {}
 
+
+	/// <summary>
+	/// Command that registers itself to execute 
+	/// when a specific notification type is dispatched by the NotificationBus,
+	/// with that notification type provided by the subclass (usually just hard coded).
+	/// </summary>
 	abstract public class NotificationCommandBase<ArgType> : Subcontroller, AutoInitService
 	{
 		public void InitService (Services services)
