@@ -22,7 +22,8 @@ namespace BeatThat.Commands
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
 	public class RegisterCommandAttribute : RegisterServiceAttribute 
 	{
-		public RegisterCommandAttribute(Type serviceInterface = null, int priority = 0, Type[] proxyInterfaces = null) : base(serviceInterface, proxyInterfaces, priority) {}
+		public RegisterCommandAttribute(Type serviceInterface = null, int priority = 0, Type[] proxyInterfaces = null) : 
+        base(serviceInterface, proxyInterfaces: proxyInterfaces, priority: priority) {}
 	}
 }
 
