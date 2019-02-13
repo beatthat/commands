@@ -1,7 +1,7 @@
 {
   "name": "commands",
   "scope": "beatthat",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Use Command to encapsulate a complex operation, e.g. async, communicates with multiple services. Commands are generally wired to execute in response to a Notification (see beatthat/notifications)",
   "main": "index.js",
   "repository": {
