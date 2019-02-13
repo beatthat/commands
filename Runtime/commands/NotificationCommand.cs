@@ -63,7 +63,18 @@ namespace BeatThat.Commands
 		private Action<ArgType> m_requestAction;
 	}
 
-	abstract public class NotificationCommandBase : NotificationCommandBase<Notification> {}
+	abstract public class NotificationCommandBase : NotificationCommandBase<Notification> 
+    {
+        override public void Execute(Notification n)
+        {
+            Execute();
+        }
+
+        virtual public void Execute()
+        {
+            throw new NotImplementedException("must override either Execute() (with no args) or Execute(Notification)");
+        }
+    }
 
 }
 
